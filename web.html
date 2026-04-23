@@ -6,7 +6,6 @@
     <title>Start Your Website Project</title>
 
     <style>
-        /* Modern Animated Background */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
@@ -44,30 +43,11 @@
             margin-bottom: 1.5rem;
         }
 
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-            font-size: 26px;
-        }
+        h1 { color: #2c3e50; font-size: 26px; margin-bottom: 0.5rem; }
+        p.subtitle { color: #666; font-size: 14px; margin-bottom: 1.5rem; }
 
-        p.subtitle {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-            text-align: left;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.4rem;
-            font-weight: 600;
-            color: #444;
-            font-size: 14px;
-        }
+        .form-group { margin-bottom: 1rem; text-align: left; }
+        label { display: block; margin-bottom: 0.4rem; font-weight: 600; color: #444; font-size: 14px; }
 
         input, textarea {
             width: 100%;
@@ -77,7 +57,6 @@
             box-sizing: border-box;
             font-size: 14px;
             background: #fdfdfd;
-            font-family: inherit;
         }
 
         .notice {
@@ -101,13 +80,10 @@
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
 
-        button:hover {
-            background: #000;
-            transform: scale(1.02);
-        }
+        button:hover { background: #000; transform: scale(1.02); }
     </style>
 </head>
 <body>
@@ -118,75 +94,40 @@
     <h1>Want to make website?</h1>
     <p class="subtitle">Fill out the details below to get started.</p>
     
-    <form action="https://formspree.io/f/xqewwevy" method="POST" id="projectForm">
+    <form action="https://formspree.io/f/xqewwevy" method="POST">
         
         <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" name="Name" id="name" placeholder="Your Name" required>
+            <label>Name</label>
+            <input type="text" name="Client Name" placeholder="Your Name" required>
         </div>
 
         <div class="form-group">
-            <label for="whatsapp">WhatsApp Number</label>
-            <input type="tel" name="WhatsApp" id="whatsapp" placeholder="e.g. +1234567890" required>
+            <label>WhatsApp Number</label>
+            <input type="tel" name="WhatsApp" placeholder="e.g. +1234567890" required>
         </div>
 
         <div class="form-group">
-            <label for="type">What kind of website?</label>
-            <input type="text" name="WebsiteType" id="type" placeholder="e.g. Portfolio, Blog, Shop">
+            <label>What kind of website?</label>
+            <input type="text" name="Website Type" placeholder="e.g. Portfolio, Blog, Shop">
         </div>
 
         <div class="form-group">
-            <label for="content">What you want to include?</label>
-            <textarea name="Description" id="content" rows="3" placeholder="Pages, features, or ideas..."></textarea>
+            <label>What you want to include?</label>
+            <textarea name="Project Details" rows="3" placeholder="Pages, features, or ideas..."></textarea>
         </div>
 
         <div class="form-group">
-            <label for="color">Colour of your website</label>
-            <input type="text" name="ColorPalette" id="color" placeholder="e.g. Blue & White">
+            <label>Colour of your website</label>
+            <input type="text" name="Preferred Colors" placeholder="e.g. Blue & White">
         </div>
 
         <div class="notice">
             ℹ️ <strong>Note:</strong> We will text you from the given number to confirm it.
         </div>
 
-        <button type="submit" id="submitBtn">Submit Request</button>
+        <button type="submit">Submit Request</button>
     </form>
 </div>
-
-<script>
-    const form = document.getElementById("projectForm");
-    
-    async function handleSubmit(event) {
-      event.preventDefault();
-      const status = document.getElementById("submitBtn");
-      const data = new FormData(event.target);
-      
-      status.innerText = "Sending...";
-      status.disabled = true;
-
-      fetch(event.target.action, {
-        method: form.method,
-        body: data,
-        headers: {
-            'Accept': 'application/json'
-        }
-      }).then(response => {
-        if (response.ok) {
-          alert("Request Received! We will text you soon.");
-          form.reset();
-        } else {
-          alert("Oops! There was a problem submitting your form");
-        }
-      }).catch(error => {
-        alert("Oops! There was a problem submitting your form");
-      }).finally(() => {
-        status.innerText = "Submit Request";
-        status.disabled = false;
-      });
-    }
-    
-    form.addEventListener("submit", handleSubmit);
-</script>
 
 </body>
 </html>
