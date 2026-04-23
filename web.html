@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start Your Website Project</title>
+
     <style>
         /* Modern Animated Background */
         body {
@@ -35,7 +36,6 @@
             text-align: center;
         }
 
-        /* Hero Image */
         .hero-img {
             width: 100%;
             height: 180px;
@@ -77,9 +77,9 @@
             box-sizing: border-box;
             font-size: 14px;
             background: #fdfdfd;
+            font-family: inherit;
         }
 
-        /* Confirmation Text */
         .notice {
             background: #e7f3ff;
             color: #0056b3;
@@ -118,40 +118,75 @@
     <h1>Want to make website?</h1>
     <p class="subtitle">Fill out the details below to get started.</p>
     
-    <form onsubmit="event.preventDefault(); alert('Request Received! We will text you soon.');">
+    <form action="https://formspree.io/f/xqewwevy" method="POST" id="projectForm">
         
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="text" name="Name" id="name" placeholder="Your Name" required>
         </div>
 
         <div class="form-group">
             <label for="whatsapp">WhatsApp Number</label>
-            <input type="tel" id="whatsapp" placeholder="e.g. +1234567890" required>
+            <input type="tel" name="WhatsApp" id="whatsapp" placeholder="e.g. +1234567890" required>
         </div>
 
         <div class="form-group">
             <label for="type">What kind of website?</label>
-            <input type="text" id="type" placeholder="e.g. Portfolio, Blog, Shop">
+            <input type="text" name="WebsiteType" id="type" placeholder="e.g. Portfolio, Blog, Shop">
         </div>
 
         <div class="form-group">
             <label for="content">What you want to include?</label>
-            <textarea id="content" rows="3" placeholder="Pages, features, or ideas..."></textarea>
+            <textarea name="Description" id="content" rows="3" placeholder="Pages, features, or ideas..."></textarea>
         </div>
 
         <div class="form-group">
             <label for="color">Colour of your website</label>
-            <input type="text" id="color" placeholder="e.g. Blue & White">
+            <input type="text" name="ColorPalette" id="color" placeholder="e.g. Blue & White">
         </div>
 
         <div class="notice">
             ℹ️ <strong>Note:</strong> We will text you from the given number to confirm it.
         </div>
 
-        <button type="submit">Submit Request</button>
+        <button type="submit" id="submitBtn">Submit Request</button>
     </form>
 </div>
+
+<script>
+    const form = document.getElementById("projectForm");
+    
+    async function handleSubmit(event) {
+      event.preventDefault();
+      const status = document.getElementById("submitBtn");
+      const data = new FormData(event.target);
+      
+      status.innerText = "Sending...";
+      status.disabled = true;
+
+      fetch(event.target.action, {
+        method: form.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          alert("Request Received! We will text you soon.");
+          form.reset();
+        } else {
+          alert("Oops! There was a problem submitting your form");
+        }
+      }).catch(error => {
+        alert("Oops! There was a problem submitting your form");
+      }).finally(() => {
+        status.innerText = "Submit Request";
+        status.disabled = false;
+      });
+    }
+    
+    form.addEventListener("submit", handleSubmit);
+</script>
 
 </body>
 </html>
